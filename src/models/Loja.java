@@ -4,7 +4,7 @@ import utils.Utils;
 
 public class Loja {
 	
-	//Atributes
+	//Attributes
 	private static Integer counterId = 1;
 	private Integer id;
 	private String nomeLoja;

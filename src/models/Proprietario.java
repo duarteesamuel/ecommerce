@@ -2,6 +2,7 @@ package models;
 
 public class Proprietario {
 	
+	//Attributes
 	private static Integer counterId = 1;
 	private Integer id;
 	private String nomeCompleto;
