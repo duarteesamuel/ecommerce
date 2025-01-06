@@ -4,41 +4,37 @@ import utils.Utils;
 
 public class Loja {
 	
+	//Atributes
 	private static Integer counterId = 1;
 	private Integer id;
-	private String nome;
+	private String nomeLoja;
 	private String cnpj;
-	private String estado;
-	private String telefone;
-	private String registro;
-	private Proprietario propietario;
+	private String dataRegistro;
+	private Proprietario proprietario;
 	
 	//NoArgsConstructor
 	public Loja() {
-		
 	}
 	
 	//AllArgsConstructor
-	public Loja(String nome, String cnpj, String estado, String telefone) {
+	public Loja(String nomeLoja, String cnpj) {
 		this.id = counterId++;
-		this.nome = nome;
+		this.nomeLoja = nomeLoja;
 		this.cnpj = cnpj;
-		this.estado = estado;
-		this.telefone = telefone;
-		this.registro = Utils.registro();
+		this.dataRegistro = Utils.registro();
 	}
 	
 	//Getters & Setters
 	public Integer getId() {
 		return id;
 	}
-
-	public String getNome() {
-		return nome;
+	
+	public String getNomeLoja() {
+		return nomeLoja;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeLoja(String nomeLoja) {
+		this.nomeLoja = nomeLoja;
 	}
 
 	public String getCnpj() {
@@ -49,28 +45,20 @@ public class Loja {
 		this.cnpj = cnpj;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getDataRegistro() {
+		return dataRegistro;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setDataRegistro(String dataRegistro) {
+		this.dataRegistro = dataRegistro;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public Proprietario getProprietario() {
+		return proprietario;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getRegistro() {
-		return registro;
-	}
-
-	public Proprietario getPropietario() {
-		return propietario;
+	public void setProprietario(Proprietario proprietario) {
+		this.proprietario = proprietario;
 	}
 	
 }

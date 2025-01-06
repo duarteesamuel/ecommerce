@@ -2,10 +2,11 @@ package models;
 
 public class Proprietario {
 	
+	private static Integer counterId = 1;
+	private Integer id;
 	private String nomeCompleto;
 	private String cpf;
 	private String email;
-	private String telefone;
 	
 	//NoArgsConstructor
 	public Proprietario() {
@@ -13,14 +14,18 @@ public class Proprietario {
 	}
 
 	//AllArgsConstructor
-	public Proprietario(String nomeCompleto, String cpf, String email, String telefone) {
+	public Proprietario(String nomeCompleto, String cpf, String email) {
+		this.id = counterId++;
 		this.nomeCompleto = nomeCompleto;
 		this.cpf = cpf;
 		this.email = email;
-		this.telefone = telefone;
 	}
 	
 	//Getters and Setters
+	public Integer id() {
+		return id;
+	}
+	
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}
@@ -44,14 +49,5 @@ public class Proprietario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	
 	
 }
