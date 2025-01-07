@@ -56,18 +56,31 @@ public class CrudService {
 		}
 	
 	public static void atualizarProprietario() {
-		List<LojaException> erros = new ArrayList<>();
-		System.out.println("CPF do Proprietário: ");
-		String cpf = sc.nextLine();
-		try {
-			Proprietario buscarCpf = ProprietarioService.findByCpf(cpf);
-			if(buscarCpf != null) {
-				do {
-					erros.clear();
-				} while(!erros.isEmpty());
-			}
-		} catch(LojaException e) {
-			
+		System.out.println("Acessando...");
+		Utils.timeout();
+		System.out.println("================================");
+		System.out.println("1 - Nome");
+		System.out.println("2 - E-mail");
+		System.out.println("0 - Retornar ao menu atualizar dados");
+		System.out.println("================================");
+		System.out.print("Selecione uma opção: ");
+		int opcao = sc.nextInt();
+		sc.nextLine();
+		switch(opcao) {
+			case 1:
+				Utils.timeout();
+				ProprietarioService.atualizarNome();
+				break;
+			case 2:
+				Utils.timeout();
+				ProprietarioService.atualizarEmail();
+				break;
+			case 0:
+				Utils.timeout();
+				LojaService.atualizarDados();
+				break;
+			default:
+				throw new LojaException("Opção inválida!");
 		}
 		
 	}

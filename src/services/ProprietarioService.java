@@ -28,7 +28,6 @@ public class ProprietarioService {
 			System.out.println("=========================");
 			System.out.println("  DADOS DO PROPRIETARIO  ");
 			System.out.println("=========================");
-			sc.nextLine();
 			System.out.print("Nome completo: ");
 			String nomeCompleto = sc.nextLine();
 			System.out.print("CPF: ");
@@ -60,5 +59,16 @@ public class ProprietarioService {
 		}
 		
 		return null;
+	}
+	
+	public static void atualizarNome() {
+		List<LojaException> erros = new ArrayList<>();
+		//Implementar lógica
+		
+	}
+	
+	public static void atualizarEmail() {
+		List<LojaException> erros = new ArrayList<>();
+		//Implementar lógica
 	}
 }

@@ -29,6 +29,7 @@ public class LojaService{
 		System.out.println("=========================================");
 		System.out.print("Selecione uma opção: ");
 		int opcao = sc.nextInt();
+		sc.nextLine();
 		switch(opcao) {
 			case 1:
 				registrarLoja();
@@ -68,7 +69,6 @@ public class LojaService{
 			System.out.println("====================");
 			System.out.println("   DADOS DA LOJA   ");
 			System.out.println("====================");
-			sc.nextLine();
 			System.out.print("Nome da Loja: ");
 			String nomeLoja = sc.nextLine();
 			System.out.print("CNPJ: ");
@@ -98,11 +98,14 @@ public class LojaService{
 		System.out.println("0 - Retornar ao menu principal");
 		System.out.print("Selecione uma opção: ");
 		int opcao = sc.nextInt();
+		sc.nextLine();
 		switch(opcao) {
 			case 1:
+				Utils.timeout();
 				CrudService.atualizarLoja();
 				break;
 			case 2:
+				Utils.timeout();
 				CrudService.atualizarProprietario();
 			case 0:
 				Utils.timeout();
