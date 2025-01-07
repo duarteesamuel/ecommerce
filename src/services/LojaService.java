@@ -8,23 +8,25 @@ import exceptions.LojaException;
 import models.Loja;
 import models.Proprietario;
 import utils.Utils;
+import validations.LojaValidator;
 
 public class LojaService{
 	
 	private static Scanner sc = new Scanner(System.in);
 	private List<Loja> lojas = new ArrayList<>();
 	private List<Proprietario> proprietarios = new ArrayList<>();
+	private LojaValidator validar = new LojaValidator();
 	
 	public void menuLoja() {
 		try {
 			System.out.println("=============== MENU LOJA ===============");
-			System.out.println("1. Cadastrar uma Loja.");
-			System.out.println("2. Cadastrar um Proprietario.");
-			System.out.println("3. Atualizar Dados");
-			System.out.println("4. Deletar Dados");
-			System.out.println("5. Informações.");
-			System.out.println("6. Mais Opções.");
-			System.out.println("0. Sair");
+			System.out.println("1 - Cadastrar uma Loja.");
+			System.out.println("2 - Cadastrar um Proprietario.");
+			System.out.println("3 - Atualizar Dados");
+			System.out.println("4 - Deletar Dados");
+			System.out.println("5 - Informações.");
+			System.out.println("6 - Mais Opções.");
+			System.out.println("0 - Sair");
 			System.out.println("=========================================");
 			System.out.print("Selecione uma opção: ");
 			int opcao = sc.nextInt();
@@ -77,25 +79,20 @@ public class LojaService{
 			System.out.print("CNPJ: ");
 			String cnpj = sc.nextLine();
 			System.out.println("====================");
-			//Verificações
-			if(nomeLoja.isEmpty()) {
-				erros.add(new LojaException("Nome da loja não pode ser vazio."));
-			}
-			if(cnpj.isEmpty()) {
-				erros.add(new LojaException("CNPJ não pode ser vazio."));
-			}
-			if(erros.isEmpty()) {
+			
+			if(validar.lojaPass(nomeLoja, cnpj, erros)) {
 				Loja loja = new Loja(nomeLoja, cnpj);
 				lojas.add(loja);
-				System.out.println("Loja registrada com sucesso!");
+				System.out.println("Loja registrada com sucesso.");
+				break;
 			} else {
-				for(LojaException erro : erros) {
-					System.out.println("Erro: " + erro.getMessage());
+				for (LojaException erro : erros) {
+					System.out.println(erro.getMessage());
 				}
-				System.out.println("Pressione ENTER para digitar os dados novamente.");
+				System.out.println("PRESSIONE ENTER PARA INSERIR OS DADOS NOVAMENTE.");
 			}
 			
-		}while(!erros.isEmpty());
+		} while(!erros.isEmpty());
 	}
 	
 	public void registrarProprietario() {
@@ -114,33 +111,30 @@ public class LojaService{
 			String cpf = sc.nextLine();
 			System.out.print("E-mail: ");
 			String email = sc.nextLine();
+			System.out.println("=========================");
 			
-			//Verificações
-			if(nomeCompleto.isEmpty()) {
-				erros.add(new LojaException("Nome do proprietário não pode ser vazio."));
-			}
-			if(cpf.isEmpty()) {
-				erros.add(new LojaException("CPF não pode ser vazio."));
-			}
-			if(email.isEmpty()) {
-				erros.add(new LojaException("E-mail não pode ser vazio."));
-			}
-			if(erros.isEmpty()) {
+			//Validação
+			if(validar.proprietarioPass(nomeCompleto, cpf, email, erros)) {
 				Proprietario proprietario = new Proprietario(nomeCompleto, cpf, email);
 				proprietarios.add(proprietario);
-				System.out.println("Proprietário registrado com sucesso!");
-			} else {
+				System.out.println("Proprietário registrado com sucesso.");
+				break;
+			}else {
 				for (LojaException erro : erros) {
-					System.out.println("Erro: " + erro.getMessage());
+					System.out.println(erro.getMessage());
 				}
-				System.out.println("Pressione ENTER para digitar os dados novamente!");
+				System.out.println("PRESSIONE ENTER PARA INSERIR OS DADOS NOVAMENTE.");
 			}
-			
-		}while(!erros.isEmpty());
+		} while(!erros.isEmpty());
 	}
 	
 	public void atualizarDados() {
-		//implementar lógica
+		System.out.println("1 - Loja.");
+		System.out.println("2 - Proprietario.");
+		System.out.println("0 - Retornar ao Menu Principal.");
+		System.out.print("Selecione o desejado: ");
+		int opcao = sc.nextInt();
+		
 	}
 	
 	public void deletarDados() {
@@ -172,12 +166,20 @@ public class LojaService{
 		}
 	}
 	
-	public void findById(int id) {
+	public Loja findLojaById(int id) {
 		try {
-			//Implementar lógica
+			for(Loja loja : lojas) {
+				if(loja.getId().equals(id)) {
+					return loja;
+				} else {
+					throw new LojaException(id + " não está associado a nenhuma loja.");
+				}
+			}
 		}
 		catch (LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
+			System.out.println(e.getMessage());
 		}
+		
+		return null;
 	}
 }

@@ -53,7 +53,7 @@ public class Proprietario {
 	
 	@Override
 	public String toString() {
-		return String.format("Proprietario: %s\n CPF: %s \nE-mail: %s",
+		return String.format("Proprietario: %s\nCPF: %s \nE-mail: %s",
 				getNomeCompleto(), getCpf(), getEmail());
 	}
 }
