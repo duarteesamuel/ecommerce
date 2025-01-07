@@ -63,8 +63,8 @@ public class Loja {
 	
 	@Override
 	public String toString() {
-		return String.format("ID Loja: %d \nNome da Loja: %s \nRegistro: %s",
-				getId(), getNomeLoja(), getDataRegistro());
+		return String.format("ID Loja: %d \nNome da Loja: %s \nCNPJ: %s \nRegistro: %s",
+				getId(), getNomeLoja(), getCnpj(), getDataRegistro());
 	}
 	
 }

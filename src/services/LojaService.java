@@ -14,51 +14,46 @@ import validations.Validator;
 public class LojaService{
 	
 	private static Scanner sc = new Scanner(System.in);
-	private List<Loja> lojas = new ArrayList<>();
-	private List<Proprietario> proprietarios = new ArrayList<>();
+	private static List<Loja> lojas = new ArrayList<>();
+	private static List<Proprietario> proprietarios = new ArrayList<>();
 	private Loja loja;
 	private Proprietario proprietario;
 	
-	public void menuLoja() {
-		try {
-			System.out.println("=============== MENU LOJA ===============");
-			System.out.println("1 - Cadastrar uma Loja.");
-			System.out.println("2 - Cadastrar um Proprietario.");
-			System.out.println("3 - Atualizar Dados");
-			System.out.println("4 - Deletar Dados");
-			System.out.println("5 - Informações.");
-			System.out.println("6 - Mais Opções.");
-			System.out.println("0 - Sair");
-			System.out.println("=========================================");
-			System.out.print("Selecione uma opção: ");
-			int opcao = sc.nextInt();
-			switch(opcao) {
-				case 1:
-					registrarLoja();
-					break;
-				case 2:
-					registrarProprietario();
-					break;
-				case 3:
-					atualizarDados();
-					break;
-				case 4:
-					deletarDados();
-					break;
-				case 5:
-					mostrarInfos();
-					break;
-				case 0:
-					System.out.println("Saindo...");
-					Utils.timeout();
-					System.out.println("Obrigado por utilzar, Volte sempre!");
-					System.exit(0);
-				default:
-					throw new LojaException("Digite um número inteiro válido.");
-			}
-		}
-		catch(LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
+	public static void menuLoja() {
+		System.out.println("=============== MENU LOJA ===============");
+		System.out.println("1 - Cadastrar uma Loja.");
+		System.out.println("2 - Cadastrar um Proprietario.");
+		System.out.println("3 - Atualizar Dados");
+		System.out.println("4 - Deletar Dados");
+		System.out.println("5 - Informações.");
+		System.out.println("6 - Mais Opções.");
+		System.out.println("0 - Sair");
+		System.out.println("=========================================");
+		System.out.print("Selecione uma opção: ");
+		int opcao = sc.nextInt();
+		switch(opcao) {
+			case 1:
+				registrarLoja();
+				break;
+			case 2:
+				registrarProprietario();
+				break;
+			case 3:
+				atualizarDados();
+				break;
+			case 4:
+				deletarDados();
+				break;
+			case 5:
+				mostrarInfos();
+				break;
+			case 0:
+				System.out.println("Saindo...");
+				Utils.timeout();
+				System.out.println("Obrigado por utilzar, Volte sempre!");
+				System.exit(0);
+			default:
+				throw new LojaException("Digite um número inteiro válido.");
 		}
 		Utils.timeout();
 		menuLoja();
@@ -66,7 +61,7 @@ public class LojaService{
 	
 	
 	//Methods
-	public void registrarLoja() {
+	public static void registrarLoja() {
 		List<LojaException> erros = new ArrayList<>();
 		System.out.println("Acessando...");
 		Utils.timeout();
@@ -97,7 +92,7 @@ public class LojaService{
 		} while(!erros.isEmpty());
 	}
 	
-	public void registrarProprietario() {
+	public static void registrarProprietario() {
 		List<LojaException> erros = new ArrayList<>();
 		System.out.println("Acessando...");
 		Utils.timeout();
@@ -130,21 +125,37 @@ public class LojaService{
 		} while(!erros.isEmpty());
 	}
 	
-	public void atualizarDados() {
+	public static void atualizarDados() {
+		System.out.println("Acessando...");
+		Utils.timeout();
+		System.out.println("=================================");
 		System.out.println("1 - Atualizar Dados Loja");
 		System.out.println("2 - Atualizar Dados Proprietário");
+		System.out.println("0 - Retornar ao menu principal");
+		System.out.print("Selecione uma opção: ");
 		int opcao = sc.nextInt();
 		switch(opcao) {
 			case 1:
 				CrudService.atualizarLoja();
+				break;
+			case 2:
+				CrudService.atualizarProprietario();
+				break;
+			case 0:
+				Utils.timeout();
+				menuLoja();
+			default:
+				throw new LojaException("Opção inválida.");
 		}
+		Utils.timeout();
+		atualizarDados();
 	}
 	
-	public void deletarDados() {
+	public static void deletarDados() {
 		//implementar lógica
 	}
 	
-	public void mostrarInfos() {
+	public static void mostrarInfos() {
 		System.out.println("Acessando...");
 		Utils.timeout();
 		List<LojaException> infos = new ArrayList<>();
@@ -169,20 +180,12 @@ public class LojaService{
 		}
 	}
 	
-	public Loja findLojaById(int id) {
-		try {
-			for(Loja loja : lojas) {
-				if(loja.getId().equals(id)) {
-					return loja;
-				} else {
-					throw new LojaException(id + " não está associado a nenhuma loja.");
-				}
-			}
+	public static Loja findLojaById(int id) {
+		for(Loja loja : lojas) {
+			if(loja.getId().equals(id)) {
+				return loja;
+			} 
 		}
-		catch (LojaException e) {
-			System.out.println(e.getMessage());
-		}
-		
 		return null;
 	}
 }
