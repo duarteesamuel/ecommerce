@@ -51,4 +51,9 @@ public class Proprietario {
 		this.email = email;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("Proprietario: %s\n CPF: %s \nE-mail: %s",
+				getNomeCompleto(), getCpf(), getEmail());
+	}
 }

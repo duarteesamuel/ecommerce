@@ -61,4 +61,10 @@ public class Loja {
 		this.proprietario = proprietario;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("ID Loja: %d \nNome da Loja: %s \nRegistro: %s\n",
+				getId(), getNomeLoja(), getDataRegistro());
+	}
+	
 }

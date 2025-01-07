@@ -20,10 +20,10 @@ public class LojaService{
 			System.out.println("=============== MENU LOJA ===============");
 			System.out.println("1. Cadastrar uma Loja.");
 			System.out.println("2. Cadastrar um Proprietario.");
-			System.out.println("3. Adicionar produtos ao estoque.");
-			System.out.println("4. Atualizar produtos do estoque.");
-			System.out.println("5. Remover Produtos do estoque.");
-			System.out.println("6. Listar Produtos do estoque.");
+			System.out.println("3. Atualizar Dados");
+			System.out.println("4. Deletar Dados");
+			System.out.println("5. Informações.");
+			System.out.println("6. Mais Opções.");
 			System.out.println("0. Sair");
 			System.out.println("=========================================");
 			System.out.print("Selecione uma opção: ");
@@ -36,16 +36,13 @@ public class LojaService{
 					registrarProprietario();
 					break;
 				case 3:
-					adicionarProduto();
+					atualizarDados();
 					break;
 				case 4:
-					atualizarProduto();
+					deletarDados();
 					break;
 				case 5:
-					deletarProduto();
-					break;
-				case 6:
-					listarProdutos();
+					mostrarInfos();
 					break;
 				case 0:
 					System.out.println("Saindo...");
@@ -67,7 +64,8 @@ public class LojaService{
 	//Methods
 	public void registrarLoja() {
 		List<LojaException> erros = new ArrayList<>();
-		
+		System.out.println("Acessando...");
+		Utils.timeout();
 		do {
 			erros.clear();
 			System.out.println("====================");
@@ -102,7 +100,8 @@ public class LojaService{
 	
 	public void registrarProprietario() {
 		List<LojaException> erros = new ArrayList<>();
-		
+		System.out.println("Acessando...");
+		Utils.timeout();
 		do {
 			erros.clear();
 			System.out.println("=========================");
@@ -140,39 +139,36 @@ public class LojaService{
 		}while(!erros.isEmpty());
 	}
 	
-	public void adicionarProduto() {
-		try {
-			//Implementar lógica
-		}
-		catch (LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
-		}
+	public void atualizarDados() {
+		//implementar lógica
 	}
 	
-	public void atualizarProduto() {
-		try {
-			//Implementar lógica
-		}
-		catch (LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
-		}
+	public void deletarDados() {
+		//implementar lógica
 	}
 	
-	public void deletarProduto() {
-		try {
-			//Implementar lógica
+	public void mostrarInfos() {
+		System.out.println("Acessando...");
+		Utils.timeout();
+		List<LojaException> infos = new ArrayList<>();
+		if(lojas.isEmpty()) {
+			infos.add(new LojaException("Nenhuma loja registrada."));
+		} else {
+			for (Loja loja : lojas) {
+				System.out.println(loja);
+			}
 		}
-		catch (LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
+		
+		if(proprietarios.isEmpty()) {
+			infos.add(new LojaException("Nenhum proprietario registrado."));
+		} else {
+			for (Proprietario proprietario : proprietarios) {
+				System.out.println(proprietario);
+			}
 		}
-	}
-	
-	public void listarProdutos() {
-		try {
-			//Implementar lógica
-		}
-		catch (LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
+		
+		for(LojaException info : infos) {
+			System.out.println(info.getMessage());
 		}
 	}
 	
