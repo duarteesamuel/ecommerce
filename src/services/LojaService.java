@@ -8,6 +8,7 @@ import exceptions.LojaException;
 import models.Loja;
 import models.Proprietario;
 import utils.Utils;
+import services.CrudService;
 import validations.Validator;
 
 public class LojaService{
@@ -15,7 +16,8 @@ public class LojaService{
 	private static Scanner sc = new Scanner(System.in);
 	private List<Loja> lojas = new ArrayList<>();
 	private List<Proprietario> proprietarios = new ArrayList<>();
-	private Validator validar = new Validator();
+	private Loja loja;
+	private Proprietario proprietario;
 	
 	public void menuLoja() {
 		try {
@@ -80,7 +82,7 @@ public class LojaService{
 			String cnpj = sc.nextLine();
 			System.out.println("====================");
 			
-			if(validar.dadosLoja(nomeLoja, cnpj, erros)) {
+			if(Validator.dadosLoja(nomeLoja, cnpj, erros)) {
 				Loja loja = new Loja(nomeLoja, cnpj);
 				lojas.add(loja);
 				System.out.println("Loja registrada com sucesso.");
@@ -114,7 +116,7 @@ public class LojaService{
 			System.out.println("=========================");
 			
 			//Validação
-			if(validar.dadosProprietario(nomeCompleto, cpf, email, erros)) {
+			if(Validator.dadosProprietario(nomeCompleto, cpf, email, erros)) {
 				Proprietario proprietario = new Proprietario(nomeCompleto, cpf, email);
 				proprietarios.add(proprietario);
 				System.out.println("Proprietário registrado com sucesso.");
@@ -129,12 +131,13 @@ public class LojaService{
 	}
 	
 	public void atualizarDados() {
-		System.out.println("1 - Loja.");
-		System.out.println("2 - Proprietario.");
-		System.out.println("0 - Retornar ao Menu Principal.");
-		System.out.print("Selecione o desejado: ");
+		System.out.println("1 - Atualizar Dados Loja");
+		System.out.println("2 - Atualizar Dados Proprietário");
 		int opcao = sc.nextInt();
-		
+		switch(opcao) {
+			case 1:
+				CrudService.atualizarLoja();
+		}
 	}
 	
 	public void deletarDados() {
