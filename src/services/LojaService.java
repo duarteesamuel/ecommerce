@@ -8,14 +8,14 @@ import exceptions.LojaException;
 import models.Loja;
 import models.Proprietario;
 import utils.Utils;
-import validations.LojaValidator;
+import validations.Validator;
 
 public class LojaService{
 	
 	private static Scanner sc = new Scanner(System.in);
 	private List<Loja> lojas = new ArrayList<>();
 	private List<Proprietario> proprietarios = new ArrayList<>();
-	private LojaValidator validar = new LojaValidator();
+	private Validator validar = new Validator();
 	
 	public void menuLoja() {
 		try {
@@ -80,7 +80,7 @@ public class LojaService{
 			String cnpj = sc.nextLine();
 			System.out.println("====================");
 			
-			if(validar.lojaPass(nomeLoja, cnpj, erros)) {
+			if(validar.dadosLoja(nomeLoja, cnpj, erros)) {
 				Loja loja = new Loja(nomeLoja, cnpj);
 				lojas.add(loja);
 				System.out.println("Loja registrada com sucesso.");
@@ -114,7 +114,7 @@ public class LojaService{
 			System.out.println("=========================");
 			
 			//Validação
-			if(validar.proprietarioPass(nomeCompleto, cpf, email, erros)) {
+			if(validar.dadosProprietario(nomeCompleto, cpf, email, erros)) {
 				Proprietario proprietario = new Proprietario(nomeCompleto, cpf, email);
 				proprietarios.add(proprietario);
 				System.out.println("Proprietário registrado com sucesso.");

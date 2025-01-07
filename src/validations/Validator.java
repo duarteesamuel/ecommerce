@@ -5,11 +5,11 @@ import java.util.List;
 
 import exceptions.LojaException;
 
-public class LojaValidator {
+public class Validator {
 	
 	private boolean isValid = true;
 	
-	public boolean lojaPass(String nome, String cnpj, List<LojaException> erros) {
+	public boolean dadosLoja(String nome, String cnpj, List<LojaException> erros) {
 		if(nome.isEmpty()) {
 			erros.add(new LojaException("O nome não pode ser vazio."));
 			this.isValid = false;
@@ -22,7 +22,7 @@ public class LojaValidator {
 		return this.isValid;
 	}
 	
-	public boolean proprietarioPass(String nomeCompleto, String cpf, String email, List<LojaException> erros) {
+	public boolean dadosProprietario(String nomeCompleto, String cpf, String email, List<LojaException> erros) {
 		if(nomeCompleto.isEmpty()) {
 			erros.add(new LojaException("Nome do proprietário não pode ser vazio."));
 			this.isValid = false;
