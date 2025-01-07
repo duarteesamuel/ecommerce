@@ -1,17 +1,23 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import exceptions.LojaException;
+import models.Loja;
+import models.Proprietario;
 import utils.Utils;
 
 public class LojaService{
 	
 	private static Scanner sc = new Scanner(System.in);
+	private List<Loja> lojas = new ArrayList<>();
+	private List<Proprietario> proprietarios = new ArrayList<>();
 	
-	public void menu() {
+	public void menuLoja() {
 		try {
-			System.out.println("=============== MENU ===============");
+			System.out.println("=============== MENU LOJA ===============");
 			System.out.println("1. Cadastrar uma Loja.");
 			System.out.println("2. Cadastrar um Proprietario.");
 			System.out.println("3. Adicionar produtos ao estoque.");
@@ -19,7 +25,7 @@ public class LojaService{
 			System.out.println("5. Remover Produtos do estoque.");
 			System.out.println("6. Listar Produtos do estoque.");
 			System.out.println("0. Sair");
-			System.out.println("====================================");
+			System.out.println("=========================================");
 			System.out.print("Selecione uma opção: ");
 			int opcao = sc.nextInt();
 			switch(opcao) {
@@ -54,18 +60,43 @@ public class LojaService{
 			System.out.println("Erro: " + e.getMessage());
 		}
 		Utils.timeout();
-		menu();
+		menuLoja();
 	}
 	
 	
 	//Methods
 	public void registrarLoja() {
-		try {
-			//Implementar lógica
-		}
-		catch (LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
-		}
+		List<LojaException> erros = new ArrayList<>();
+		
+		do {
+			erros.clear();
+			System.out.println("====================");
+			System.out.println("   DADOS DA LOJA   ");
+			System.out.println("====================");
+			sc.nextLine();
+			System.out.print("Nome da Loja: ");
+			String nomeLoja = sc.nextLine();
+			System.out.print("CNPJ: ");
+			String cnpj = sc.nextLine();
+			System.out.println("====================");
+			//Verificações
+			if(nomeLoja.isEmpty()) {
+				erros.add(new LojaException("Nome da loja não pode ser vazio."));
+			}
+			if(cnpj.isEmpty()) {
+				erros.add(new LojaException("CNPJ não pode ser vazio."));
+			}
+			if(erros.isEmpty()) {
+				Loja loja = new Loja(nomeLoja, cnpj);
+				System.out.println("Loja registrada com sucesso!");
+			} else {
+				for(LojaException erro : erros) {
+					System.out.println("Erro: " + erro.getMessage());
+				}
+				System.out.println("Pressione ENTER para digitar novamente.");
+			}
+			
+		}while(!erros.isEmpty());
 	}
 	
 	public void registrarProprietario() {

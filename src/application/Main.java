@@ -11,7 +11,7 @@ public class Main {
 		
 		System.out.println("Carregando o sistema...");
 		Utils.timeout();
-		iniciar.menu();
+		iniciar.menuLoja();
 	}
 
 }
