@@ -18,11 +18,13 @@ public class CrudService {
 	
 	public static void atualizarLoja() {
 		List<LojaException> erros = new ArrayList<>();
+		System.out.println("Acessando...");
+		Utils.timeout();
 		System.out.print("ID Loja: ");
 		int idLoja = sc.nextInt();
 		sc.nextLine();
 			try {
-				Loja buscarLoja = LojaService.findLojaById(idLoja);
+				Loja buscarLoja = LojaService.findById(idLoja);
 				if(buscarLoja != null) {
 					do {
 						erros.clear();
@@ -44,15 +46,29 @@ public class CrudService {
 				} else {
 					throw new LojaException("ID não encontrado");
 				}
-			}catch(LojaException e) {
+			} catch(LojaException e) {
 				System.out.println(e.getMessage());
 			}
+			
 			System.out.println("Retornando ao menu principal");
 			Utils.timeout();
 			LojaService.menuLoja();
 		}
 	
 	public static void atualizarProprietario() {
+		List<LojaException> erros = new ArrayList<>();
+		System.out.println("CPF do Proprietário: ");
+		String cpf = sc.nextLine();
+		try {
+			Proprietario buscarCpf = ProprietarioService.findByCpf(cpf);
+			if(buscarCpf != null) {
+				do {
+					erros.clear();
+				} while(!erros.isEmpty());
+			}
+		} catch(LojaException e) {
+			
+		}
 		
 	}
 		

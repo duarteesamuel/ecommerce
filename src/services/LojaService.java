@@ -8,7 +8,6 @@ import exceptions.LojaException;
 import models.Loja;
 import models.Proprietario;
 import utils.Utils;
-import services.CrudService;
 import validations.Validator;
 
 public class LojaService{
@@ -17,7 +16,6 @@ public class LojaService{
 	private static List<Loja> lojas = new ArrayList<>();
 	private static List<Proprietario> proprietarios = new ArrayList<>();
 	private Loja loja;
-	private Proprietario proprietario;
 	
 	public static void menuLoja() {
 		System.out.println("=============== MENU LOJA ===============");
@@ -36,7 +34,7 @@ public class LojaService{
 				registrarLoja();
 				break;
 			case 2:
-				registrarProprietario();
+				ProprietarioService.registrarProprietario();
 				break;
 			case 3:
 				atualizarDados();
@@ -92,42 +90,8 @@ public class LojaService{
 		} while(!erros.isEmpty());
 	}
 	
-	public static void registrarProprietario() {
-		List<LojaException> erros = new ArrayList<>();
-		System.out.println("Acessando...");
-		Utils.timeout();
-		do {
-			erros.clear();
-			System.out.println("=========================");
-			System.out.println("  DADOS DO PROPRIETARIO  ");
-			System.out.println("=========================");
-			sc.nextLine();
-			System.out.print("Nome completo: ");
-			String nomeCompleto = sc.nextLine();
-			System.out.print("CPF: ");
-			String cpf = sc.nextLine();
-			System.out.print("E-mail: ");
-			String email = sc.nextLine();
-			System.out.println("=========================");
-			
-			//Validação
-			if(Validator.dadosProprietario(nomeCompleto, cpf, email, erros)) {
-				Proprietario proprietario = new Proprietario(nomeCompleto, cpf, email);
-				proprietarios.add(proprietario);
-				System.out.println("Proprietário registrado com sucesso.");
-				break;
-			}else {
-				for (LojaException erro : erros) {
-					System.out.println(erro.getMessage());
-				}
-				System.out.println("PRESSIONE ENTER PARA INSERIR OS DADOS NOVAMENTE.");
-			}
-		} while(!erros.isEmpty());
-	}
 	
 	public static void atualizarDados() {
-		System.out.println("Acessando...");
-		Utils.timeout();
 		System.out.println("=================================");
 		System.out.println("1 - Atualizar Dados Loja");
 		System.out.println("2 - Atualizar Dados Proprietário");
@@ -140,7 +104,6 @@ public class LojaService{
 				break;
 			case 2:
 				CrudService.atualizarProprietario();
-				break;
 			case 0:
 				Utils.timeout();
 				menuLoja();
@@ -148,7 +111,6 @@ public class LojaService{
 				throw new LojaException("Opção inválida.");
 		}
 		Utils.timeout();
-		atualizarDados();
 	}
 	
 	public static void deletarDados() {
@@ -180,7 +142,7 @@ public class LojaService{
 		}
 	}
 	
-	public static Loja findLojaById(int id) {
+	public static Loja findById(int id) {
 		for(Loja loja : lojas) {
 			if(loja.getId().equals(id)) {
 				return loja;
@@ -188,4 +150,5 @@ public class LojaService{
 		}
 		return null;
 	}
+	
 }
