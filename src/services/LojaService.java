@@ -88,24 +88,56 @@ public class LojaService{
 			}
 			if(erros.isEmpty()) {
 				Loja loja = new Loja(nomeLoja, cnpj);
+				lojas.add(loja);
 				System.out.println("Loja registrada com sucesso!");
 			} else {
 				for(LojaException erro : erros) {
 					System.out.println("Erro: " + erro.getMessage());
 				}
-				System.out.println("Pressione ENTER para digitar novamente.");
+				System.out.println("Pressione ENTER para digitar os dados novamente.");
 			}
 			
 		}while(!erros.isEmpty());
 	}
 	
 	public void registrarProprietario() {
-		try {
-			//Implementar lógica
-		}
-		catch(LojaException e) {
-			System.out.println("Erro: " + e.getMessage());
-		}
+		List<LojaException> erros = new ArrayList<>();
+		
+		do {
+			erros.clear();
+			System.out.println("=========================");
+			System.out.println("  DADOS DO PROPRIETARIO  ");
+			System.out.println("=========================");
+			sc.nextLine();
+			System.out.print("Nome completo: ");
+			String nomeCompleto = sc.nextLine();
+			System.out.print("CPF: ");
+			String cpf = sc.nextLine();
+			System.out.print("E-mail: ");
+			String email = sc.nextLine();
+			
+			//Verificações
+			if(nomeCompleto.isEmpty()) {
+				erros.add(new LojaException("Nome do proprietário não pode ser vazio."));
+			}
+			if(cpf.isEmpty()) {
+				erros.add(new LojaException("CPF não pode ser vazio."));
+			}
+			if(email.isEmpty()) {
+				erros.add(new LojaException("E-mail não pode ser vazio."));
+			}
+			if(erros.isEmpty()) {
+				Proprietario proprietario = new Proprietario(nomeCompleto, cpf, email);
+				proprietarios.add(proprietario);
+				System.out.println("Proprietário registrado com sucesso!");
+			} else {
+				for (LojaException erro : erros) {
+					System.out.println("Erro: " + erro.getMessage());
+				}
+				System.out.println("Pressione ENTER para digitar os dados novamente!");
+			}
+			
+		}while(!erros.isEmpty());
 	}
 	
 	public void adicionarProduto() {
