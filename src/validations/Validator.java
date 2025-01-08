@@ -37,6 +37,9 @@ public class Validator {
 		}
 		
 		return isValid;
-		
+	}
+	
+	public static boolean dadosProduto() {
+		return isValid;
 	}
 }

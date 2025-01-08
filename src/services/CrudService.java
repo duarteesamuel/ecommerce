@@ -194,7 +194,9 @@ public class CrudService {
 			}else {
 				throw new LojaException("ID não encontado!");
 			}
-		
+		} catch(LojaException e) {
+			System.out.println(e.getMessage());
+		}
 		Utils.timeout();
 		LojaService.menuLoja();
 	}
