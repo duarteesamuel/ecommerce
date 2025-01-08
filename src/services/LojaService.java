@@ -14,19 +14,17 @@ public class LojaService{
 	
 	private static Scanner sc = new Scanner(System.in);
 	private static List<Loja> lojas = new ArrayList<>();
-	private static List<Proprietario> proprietarios = new ArrayList<>();
-	private Loja loja;
 	
-	public static void menuLoja() {
-		System.out.println("=============== MENU LOJA ===============");
-		System.out.println("1 - Registrar uma Loja.");
-		System.out.println("2 - Registrar um Proprietario.");
-		System.out.println("3 - Atualizar Dados");
-		System.out.println("4 - Deletar Dados");
-		System.out.println("5 - Informações.");
-		System.out.println("6 - Mais Opções.");
-		System.out.println("0 - Sair");
-		System.out.println("=========================================");
+	public static void menu() {
+		System.out.println("=============== MENU PRINCIPAL ===============");
+		System.out.println("| 1 - Registrar uma Loja.");
+		System.out.println("| 2 - Registrar um Proprietario.");
+		System.out.println("| 3 - Atualizar Dados");
+		System.out.println("| 4 - Deletar Dados");
+		System.out.println("| 5 - Acessar Loja");
+		System.out.println("| 6 - Informações da Loja");
+		System.out.println("| 0 - Sair");
+		System.out.println("==============================================");
 		System.out.print("Selecione uma opção: ");
 		int opcao = sc.nextInt();
 		sc.nextLine();
@@ -44,8 +42,10 @@ public class LojaService{
 				deletarDados();
 				break;
 			case 5:
-				CrudService.mostrarInfos();
+				acessarLoja();
 				break;
+			case 6:
+				CrudService.mostrarInfos();
 			case 0:
 				System.out.println("Saindo...");
 				Utils.timeout();
@@ -55,7 +55,53 @@ public class LojaService{
 				throw new LojaException("Digite um número inteiro válido.");
 		}
 		Utils.timeout();
-		menuLoja();
+		menu();
+	}
+	
+	public static void menuLoja() {
+		System.out.println("========================");
+		System.out.println("        MENU LOJA        ");
+		System.out.println("========================");
+		System.out.println("| 1 - Cadastrar Produto ");
+		System.out.println("| 2 - Listar Produtos   ");
+		System.out.println("| 3 - Comprar           "); 
+		System.out.println("| 4 - Ver Carrinho      ");
+		System.out.println("| 0 - Retornar ao menu principal");
+		System.out.print("Selecione uma opção: ");
+		int opcao = sc.nextInt();
+		sc.nextLine();
+		switch(opcao) {
+			case 1:
+				ProdutoService.cadastrarProduto();
+				break;
+			case 2:
+				ProdutoService.verProdutos();
+				break;
+			case 3:
+				ProdutoService.comprarProduto();
+				break;
+			case 4:
+				ProdutoService.verCarrinho();
+				break;
+			case 0:
+				System.out.println("Retornando ao menu principal...");
+				Utils.timeout();
+				menu();
+		}
+	}
+	
+	public static void acessarLoja() {
+		System.out.println("Acessando...");
+		Utils.timeout();
+		try {
+			if(CrudService.getLojas().isEmpty()) {
+				throw new LojaException("Nenhuma loja registrada.");
+			}else {
+				menuLoja();
+			}
+		} catch(LojaException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	
@@ -79,7 +125,7 @@ public class LojaService{
 				CrudService.atualizarProprietario();
 			case 0:
 				Utils.timeout();
-				menuLoja();
+				menu();
 			default:
 				throw new LojaException("Opção inválida.");
 		}
@@ -106,14 +152,12 @@ public class LojaService{
 			CrudService.deletarProprietario();
 		case 0:
 			Utils.timeout();
-			menuLoja();
+			menu();
 		default:
 			throw new LojaException("Opção inválida.");
 	}
 	Utils.timeout();
 	}
-	
-	//Buscar Loja pelo ID 
 	
 	
 }

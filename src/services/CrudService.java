@@ -120,7 +120,7 @@ public class CrudService {
 			
 			System.out.println("Retornando ao menu principal");
 			Utils.timeout();
-			LojaService.menuLoja();
+			LojaService.menu();
 		}
 	
 	public static void atualizarProprietario() {
@@ -171,7 +171,7 @@ public class CrudService {
 		System.out.println("Retornando ao menu principal...");
 		System.out.println("============================================");
 		Utils.timeout();
-		LojaService.menuLoja();
+		LojaService.menu();
 	}
 	
 	//DELETE
@@ -198,7 +198,7 @@ public class CrudService {
 			System.out.println(e.getMessage());
 		}
 		Utils.timeout();
-		LojaService.menuLoja();
+		LojaService.menu();
 	}
 	
 	public static void deletarProprietario() {
@@ -273,6 +273,15 @@ public class CrudService {
 		}
 		
 		return null;
+	}
+	
+	//Get Lojas && Proprietarios
+	public static List<Loja> getLojas(){
+		return lojas;
+	}
+	
+	public static List<Proprietario> getProprietarios(){
+		return proprietarios;
 	}
 		
 }
