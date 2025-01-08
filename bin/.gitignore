@@ -1,9 +1,8 @@
 /application/
+/enums/
 /exceptions/
 /models/
 /module-info.class
 /services/
 /utils/
 /validations/
-/crud/
-/enums/

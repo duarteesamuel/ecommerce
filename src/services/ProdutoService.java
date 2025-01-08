@@ -1,19 +1,20 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import exceptions.ProdutoException;
-import models.Eletronicos;
 import models.Produto;
 import utils.Utils;
-import validations.Validator;
 
 public class ProdutoService {
 	
 	private static Scanner sc = new Scanner(System.in);
 	private static List<Produto> produtos = new ArrayList<>();
+	private static Map<Produto, Integer> carrinho = new HashMap<>();
 	
 	
 	
@@ -26,12 +27,12 @@ public class ProdutoService {
 			System.out.println("===================");
 			System.out.println("   DADOS PRODUTO   ");
 			System.out.println("===================");
-			System.out.println("Categoria: ");
-			String categoria = sc.nextLine();
 			System.out.print("Nome do produto: ");
 			String nome = sc.nextLine();
 			System.out.print("Preço: ");
 			Double preco = sc.nextDouble();
+			System.out.print("Marca: ");
+			String marca = sc.nextLine();
 			System.out.println("===================");
 		} while (!erros.isEmpty());
 	}
