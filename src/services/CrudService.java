@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -91,7 +92,7 @@ public class CrudService {
 		int idLoja = sc.nextInt();
 		sc.nextLine();
 			try {
-				Loja buscarLoja = LojaService.findById(idLoja);
+				Loja buscarLoja = findById(idLoja);
 				if(buscarLoja != null) {
 					do {
 						erros.clear();
@@ -134,7 +135,7 @@ public class CrudService {
 		System.out.println("Buscando...");
 		Utils.timeout();
 		try {
-			Proprietario buscarCpf = ProprietarioService.findByCpf(cpf);
+			Proprietario buscarCpf = findByCpf(cpf);
 			if(buscarCpf != null) {
 				do {
 					erros.clear();
@@ -175,11 +176,50 @@ public class CrudService {
 	
 	//DELETE
 	public static void deletarLoja() {
+		System.out.println("Acessando...");
+		Utils.timeout();
+		System.out.println("=============================");
+		System.out.println("        DELETAR LOJA         ");
+		System.out.println("=============================");
+		System.out.print("Informe o ID da Loja: ");
+		int idLoja = sc.nextInt();
+		sc.nextLine();
+		try {
+			Loja deletarLoja = findById(idLoja);
+			if(deletarLoja != null) {
+				System.out.println("Deletando...");
+				Utils.timeout();
+				lojas.remove(deletarLoja);
+				System.out.println("Loja removida com sucesso.");
+			}else {
+				throw new LojaException("ID não encontado!");
+			}
 		
+		Utils.timeout();
+		LojaService.menuLoja();
 	}
 	
 	public static void deletarProprietario() {
-		
+		System.out.println("Acessando...");
+		Utils.timeout();
+		System.out.println("=============================");
+		System.out.println("     DELETAR PROPRIETÁRIO    ");
+		System.out.println("=============================");
+		System.out.print("Informe o CPF do Proprietário: ");
+		String cpf = sc.nextLine();
+		try {
+			Proprietario buscarCpf = findByCpf(cpf);
+			if(buscarCpf != null) {
+				System.out.println("Deletando...");
+				Utils.timeout();
+				proprietarios.remove(buscarCpf);
+				System.out.println("Proprietário deletado com sucesso.");
+			} else {
+				throw new LojaException("CPF não encontrado.");
+			}
+		} catch(LojaException e) {
+			System.out.println(e.getMessage());
+		} 
 	}
 	
 	//ListAll
@@ -210,6 +250,27 @@ public class CrudService {
 			System.out.println(info.getMessage());
 		}
 		Utils.timeout();
+	}
+	
+	//Buscar pelo id
+	public static Loja findById(int id) {
+		for(Loja loja : lojas) {
+			if(loja.getId() == id) {
+				return loja;
+			} 
+		}
+		return null;
+	}
+	
+	//Buscar pelo cpf
+	public static Proprietario findByCpf(String cpf) {
+		for (Proprietario prop : proprietarios) {
+			if(prop.getCpf().equals(cpf)) {
+				return prop;
+			}
+		}
+		
+		return null;
 	}
 		
 }

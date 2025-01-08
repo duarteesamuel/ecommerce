@@ -92,8 +92,8 @@ public class LojaService{
 		System.out.println("================================");
 		System.out.println("         DELETAR DADOS          ");
 		System.out.println("================================");
-		System.out.println("1 - Deletar Dados Loja");
-		System.out.println("2 - Deletar Dados Proprietário");
+		System.out.println("1 - Excluir Loja");
+		System.out.println("2 - Excluir Proprietário");
 		System.out.println("0 - Retornar ao menu principal");
 		System.out.print("Selecione uma opção: ");
 		int opcao = sc.nextInt();
@@ -114,13 +114,6 @@ public class LojaService{
 	}
 	
 	//Buscar Loja pelo ID 
-	public static Loja findById(int id) {
-		for(Loja loja : lojas) {
-			if(loja.getId().equals(id)) {
-				return loja;
-			} 
-		}
-		return null;
-	}
+	
 	
 }
