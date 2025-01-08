@@ -4,11 +4,8 @@ import enums.Categoria;
 
 public class Smartphone extends Produto{
 	
-	private String marca;
-
-	public Smartphone(Categoria categoria, String nome, Double preco, String marca) {
-		super(categoria, nome, preco);
-		this.marca = marca;
+	public Smartphone(String nome, Double preco, String marca) {
+		super(nome, preco, marca);
 	}
 	
 	@Override

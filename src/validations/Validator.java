@@ -1,9 +1,9 @@
 package validations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import exceptions.LojaException;
+import exceptions.ProdutoException;
 
 public class Validator {
 	
@@ -39,7 +39,25 @@ public class Validator {
 		return isValid;
 	}
 	
-	public static boolean dadosProduto() {
+	public static boolean dadosProduto(String nome, Double preco, List<ProdutoException> erros) {
+		
+		String numeros = "*.[0-9]*.";
+		String simbolos = "*.[\\/!@#$%&*()_-=+[]{}^~:;|?]*.";
+		
+		if(nome.isEmpty()) {
+			erros.add(new ProdutoException("Produto recusado: Nome não pode ser vazio."));
+			isValid = false;
+		}
+		if(nome.matches(numeros)) {
+			erros.add(new ProdutoException("Produto recusado: Nome não pode conter números"));
+			isValid = false;
+		}
+		if(nome.matches(simbolos)) {
+			erros.add(new ProdutoException("Produto recusado: Nome não pode conter simbolos."));
+			isValid = false;
+		}
+		
 		return isValid;
+		
 	}
 }

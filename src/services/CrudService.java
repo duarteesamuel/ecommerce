@@ -14,7 +14,6 @@ import validations.Validator;
 public class CrudService {
 	
 	private static Scanner sc = new Scanner(System.in);
-	private Loja loja;
 	private static List<Loja> lojas = new ArrayList<>();
 	private static List<Proprietario> proprietarios = new ArrayList<>();
 	

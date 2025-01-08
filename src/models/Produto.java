@@ -8,13 +8,13 @@ public abstract class Produto {
 	protected Integer idProduto;
 	protected String nome;
 	protected Double preco;
-	protected Categoria categoria;
+	protected String marca;
 	
-	public Produto(Categoria categoria, String nome, Double preco) {
+	public Produto(String nome, Double preco, String marca) {
 		this.idProduto = counterId++;
-		this.categoria = categoria;
 		this.nome = nome;
 		this.preco = preco;
+		this.marca = marca;
 	}
 
 	public Integer getIdProduto() {
@@ -40,7 +40,14 @@ public abstract class Produto {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
 	
 	
 }
