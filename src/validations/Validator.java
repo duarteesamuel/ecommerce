@@ -49,19 +49,19 @@ public class Validator {
 	}
 	
 	//Verificar os Dados do Produto
-	public static boolean dadosProduto(String nome, Double preco, String marca, List<ProdutoException> erros) {
-		if(nome == null || nome.isEmpty() || marca == null || marca.isEmpty()) {
+	public static boolean dadosProduto(String categoria,String nome, Double preco, String marca, List<ProdutoException> erros) {
+		if(categoria == null || categoria.isEmpty() || nome == null || nome.isEmpty() || marca == null || marca.isEmpty()) {
 			erros.add(new ProdutoException("Produto recusado: Preencha todos os Campos."));
 			isValid = false;
 		}
 		
-		if(isStringValid(nome, numeros) || isStringValid(marca, numeros)) {
-			erros.add(new ProdutoException("Produto recusado: Nome e Marca devem conter apenas letras."));
+		if(isStringValid(categoria, numeros) || isStringValid(nome, numeros) || isStringValid(marca, numeros)) {
+			erros.add(new ProdutoException("Produto recusado: Categoria, Nome e Marca não podem conter números."));
 			isValid = false;
 		}
 		
-		if(isStringValid(nome, simbolos) || isStringValid(marca, simbolos)) {
-			erros.add(new ProdutoException("Produto recusado: Nome e Marca devem conter apenas letras."));
+		if(isStringValid(categoria, simbolos)|| isStringValid(nome, simbolos) || isStringValid(marca, simbolos)) {
+			erros.add(new ProdutoException("Produto recusado: Categoria, Nome e Marca não podem conter caracteres especiais."));
 			isValid = false;
 		}
 		

@@ -6,9 +6,14 @@ public abstract class Produto {
 	private static Integer counterId = 1;
 	
 	protected Integer idProduto;
+	protected Categoria categoria;
 	protected String nome;
 	protected Double preco;
 	protected String marca;
+	
+	public Produto(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	
 	public Produto(String nome, Double preco, String marca) {
 		this.idProduto = counterId++;
