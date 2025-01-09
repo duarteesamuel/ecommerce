@@ -65,7 +65,7 @@ public class LojaService{
 		System.out.println("========================");
 		System.out.println("| 1 - Cadastrar Produto ");
 		System.out.println("| 2 - Listar Produtos   ");
-		System.out.println("| 3 - Comprar           "); 
+		System.out.println("| 3 - Comprar Produtos  "); 
 		System.out.println("| 4 - Ver Carrinho      ");
 		System.out.println("| 0 - Retornar ao menu principal");
 		System.out.print("Selecione uma opção: ");
