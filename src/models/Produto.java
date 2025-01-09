@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 import enums.Categoria;
 import utils.Utils;
 
@@ -66,6 +68,24 @@ public abstract class Produto {
 		return String.format("ID Produto: %d \nProduto: %s \nPreço: %s \nMarca: %s\n",
 				getIdProduto(), getNome(), Utils.doubleToString(getPreco()), getMarca());
 	}
-	
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idProduto);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		return Objects.equals(idProduto, other.idProduto);
+	}
 	
 }

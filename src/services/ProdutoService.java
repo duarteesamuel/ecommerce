@@ -93,6 +93,7 @@ public class ProdutoService {
 			System.out.print("Selecione a lista de produtos: ");
 			int opcao = sc.nextInt();
 			sc.nextLine();
+			System.out.println("===============");
 			Utils.timeout();
 			if(opcao == 1) {
 				if(smartphones.isEmpty()) {
@@ -124,50 +125,50 @@ public class ProdutoService {
 			if(produtos.isEmpty()) {
 				throw new ProdutoException("Nenhum produto cadastrado.");
 			} 
-			
-			System.out.println("====================");
-			System.out.println("  COMPRAR PRODUTOS  ");
-			System.out.println("====================");
-			System.out.println("Listando produtos...");
-			Utils.timeout();
-			System.out.println("=============== PRODUTOS DISPONIVEIS ===============");
-			exibirProdutos(produtos);
-			
-			System.out.print("ID Produto que deseja adicionar ao carrinho: ");
-			int id = sc.nextInt();
-			sc.nextLine();
-			
-			boolean isPresent = false;
-			
-			for(Produto p : produtos) {
-				if(p.getIdProduto() == id) {
-					int quantidade = 0;
-					carrinho.put(p, quantidade + 1);
-					
-					System.out.println("Produto adicionado ao carrinho.");
-					isPresent = true;
-					
-					if(isPresent) {
-						System.out.println("Adicionar outro produto ao carrinho? Sim ou Não: ");
-						char resp = sc.next().charAt(0);
-						resp = Character.toUpperCase(resp);
-						
-						if(resp == 'S') {
-							comprarProduto();
+			boolean continuar = true;
+			while(continuar) {
+				System.out.println("====================");
+				System.out.println("  COMPRAR PRODUTOS  ");
+				System.out.println("====================");
+				System.out.println("Listando produtos...");
+				Utils.timeout();
+				System.out.println("=============== PRODUTOS DISPONIVEIS ===============");
+				exibirProdutos(produtos);
+				
+				System.out.print("ID Produto que deseja adicionar ao carrinho: ");
+				int id = sc.nextInt();
+				sc.nextLine();
+				
+				boolean isPresent = false;
+				
+				for (Produto p : produtos) {
+					if(p.getIdProduto() == id) {
+						if(carrinho.containsKey(p)) {
+							int quantidade = carrinho.get(p);
+							carrinho.put(p, quantidade + 1);
+						} else {
+							carrinho.put(p, 1);
 						}
-						else {
-							finalizarCompra();
-						}
+						System.out.println("Produto adicionado ao carrinho.");
+						isPresent = true;
+						break;
 					}
-				} else {
-					throw new ProdutoException("Produto não encontrado!");
 				}
+				
+				if(!isPresent) {
+					throw new ProdutoException("Não foi possível localizar o produto!");
+				}
+				
+				System.out.print("Adicionar outro produto ao carrinho? (Sim ou Não): ");
+				char resp = sc.next().charAt(0);
+				resp = Character.toUpperCase(resp);
+				continuar = (resp == 'S');
 			}
 		}
 		catch(ProdutoException e) {
 			System.out.println(e.getMessage());
 		}
-		LojaService.acessarLoja();
+		finalizarCompra();
 	}
 	
 	//Implementar lógica de aumentar quantidade do mesmo produto no carrinho
@@ -178,7 +179,7 @@ public class ProdutoService {
 		System.out.println("=========================");
 		for(Produto p : carrinho.keySet()) {
 			int quantidade = carrinho.get(p);
-			valorTotal = quantidade * p.getPreco();
+			valorTotal += quantidade * p.getPreco();
 			System.out.printf("Produto: %s - Quantidade: x%d%n", p.getNome(), quantidade);
 		}
 		System.out.println("Valor total da compra: " + Utils.doubleToString(valorTotal));
@@ -222,7 +223,4 @@ public class ProdutoService {
 		}
 	}
 	
-	public static boolean findById(int id) {
-		
-	}
 }

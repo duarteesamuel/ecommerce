@@ -53,7 +53,7 @@ public class LojaService{
 				System.out.println("Obrigado por utilzar, Volte sempre!");
 				System.exit(0);
 			default:
-				throw new LojaException("Digite um número inteiro válido.");
+				throw new LojaException("Opção inválida!");
 		}
 		Utils.timeout();
 		menu();
@@ -88,7 +88,11 @@ public class LojaService{
 				System.out.println("Retornando ao menu principal...");
 				Utils.timeout();
 				menu();
+			default:
+				throw new LojaException("Opção inválida.");
 		}
+		Utils.timeout();
+		acessarLoja();
 	}
 	
 	public static void acessarLoja() {
