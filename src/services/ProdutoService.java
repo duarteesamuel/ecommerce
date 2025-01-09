@@ -139,36 +139,29 @@ public class ProdutoService {
 			
 			boolean isPresent = false;
 			
-			//Erro na lógica
 			for(Produto p : produtos) {
 				if(p.getIdProduto() == id) {
 					int quantidade = 0;
-					if(carrinho.size() == 0) {
-						quantidade = carrinho.get(p);
-					}
-					else {
-						carrinho.put(p, quantidade + 1);
+					carrinho.put(p, quantidade + 1);
+					
+					System.out.println("Produto adicionado ao carrinho.");
+					isPresent = true;
+					
+					if(isPresent) {
+						System.out.println("Adicionar outro produto ao carrinho? Sim ou Não: ");
+						char resp = sc.next().charAt(0);
+						resp = Character.toUpperCase(resp);
+						
+						if(resp == 'S') {
+							comprarProduto();
+						}
+						else {
+							finalizarCompra();
+						}
 					}
 				} else {
-					throw new ProdutoException("ID Produto não foi encontrado.");
+					throw new ProdutoException("Produto não encontrado!");
 				}
-				
-				System.out.println("Produto adicionado ao carrinho.");
-				isPresent = true;
-				
-				if(isPresent) {
-					System.out.println("Adicionar outro produto ao carrinho? (S/N): ");
-					char resp = sc.next().charAt(0);
-					resp = Character.toUpperCase(resp);
-					
-					if(resp == 'S') {
-						comprarProduto();
-					}
-					else {
-						finalizarCompra();
-					}
-				}
-				
 			}
 		}
 		catch(ProdutoException e) {
@@ -177,22 +170,22 @@ public class ProdutoService {
 		LojaService.acessarLoja();
 	}
 	
+	//Implementar lógica de aumentar quantidade do mesmo produto no carrinho
 	public static void finalizarCompra() {
 		double valorTotal = 0.0;
 		System.out.println("=========================");
-		System.out.println("   PRODUTOS NO CARRINHO  ");
+		System.out.println("     FINALIZAR COMPRA    ");
 		System.out.println("=========================");
-		System.out.println("Carregando carrinho...");
-		Utils.timeout();
-		
 		for(Produto p : carrinho.keySet()) {
 			int quantidade = carrinho.get(p);
 			valorTotal = quantidade * p.getPreco();
-			System.out.printf("Produto: %s - x%d%n", p, quantidade);
+			System.out.printf("Produto: %s - Quantidade: x%d%n", p.getNome(), quantidade);
 		}
 		System.out.println("Valor total da compra: " + Utils.doubleToString(valorTotal));
 		carrinho.clear();
-		
+		System.out.println("=======================");
+		System.out.println("Finalizando compra...");
+		Utils.timeout();
 		System.out.println("Compra realizada. Obrigado pela preferência!");
 	}
 	
@@ -227,5 +220,9 @@ public class ProdutoService {
 		} catch (ProdutoException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public static boolean findById(int id) {
+		
 	}
 }
