@@ -4,13 +4,13 @@ import enums.Categoria;
 
 public class Smartphone extends Produto{
 	
-	public Smartphone(String nome, Double preco, String marca) {
-		super(nome, preco, marca);
+	
+	public Smartphone() {
+		
 	}
 	
-	@Override
-	public String toString() {
-		return "";
+	public Smartphone(Categoria categoria, String nome, Double preco, String marca) {
+		super(categoria, nome, preco, marca);
 	}
 	
 }

@@ -46,6 +46,7 @@ public class LojaService{
 				break;
 			case 6:
 				CrudService.mostrarInfos();
+				break;
 			case 0:
 				System.out.println("Saindo...");
 				Utils.timeout();

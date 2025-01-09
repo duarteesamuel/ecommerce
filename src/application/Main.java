@@ -1,17 +1,15 @@
 package application;
 
-import models.Loja;
+import java.util.Locale;
 import services.LojaService;
 import utils.Utils;
 
 public class Main {
 
 	public static void main(String[] args) {
-		LojaService iniciar = new LojaService();
-		
-		System.out.println("Carregando o sistema...");
+		Locale.setDefault(Locale.US);
+		System.out.println("Carregando sistema...");
 		Utils.timeout();
-		iniciar.menu();
+		LojaService.menu();
 	}
-
 }

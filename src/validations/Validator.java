@@ -55,8 +55,8 @@ public class Validator {
 			isValid = false;
 		}
 		
-		if(isStringValid(categoria, numeros) || isStringValid(nome, numeros) || isStringValid(marca, numeros)) {
-			erros.add(new ProdutoException("Produto recusado: Categoria, Nome e Marca não podem conter números."));
+		if(isStringValid(categoria, numeros) || isStringValid(marca, numeros)) {
+			erros.add(new ProdutoException("Produto recusado: Categoria e Marca não podem conter números."));
 			isValid = false;
 		}
 		
@@ -73,6 +73,17 @@ public class Validator {
 		
 	}
 	
+	public static boolean verificarCategoria(String categoria, List<ProdutoException> erros) {
+		
+		categoria = categoria.toUpperCase().trim();
+		
+		if(!categoria.equals("SMARTPHONES") || categoria.equals("ELETRONICOS")) {
+			erros.add(new ProdutoException("Categoria inválida. Digite novamente (Smartphones ou Eletronicos)!"));
+			isValid = false;
+		}
+		
+		return isValid;
+	}
 	
 	public static boolean isStringValid(String entrada, String pattern) {
 		return entrada != null && entrada.matches(pattern);

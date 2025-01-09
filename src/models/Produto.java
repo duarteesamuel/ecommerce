@@ -1,6 +1,7 @@
 package models;
 
 import enums.Categoria;
+import utils.Utils;
 
 public abstract class Produto {
 	private static Integer counterId = 1;
@@ -9,19 +10,25 @@ public abstract class Produto {
 	protected Categoria categoria;
 	protected String nome;
 	protected Double preco;
-	protected String marca;
+	protected String marca;	
 	
-	public Produto(Categoria categoria) {
-		this.categoria = categoria;
+	public Produto() {
+		super();
 	}
 	
-	public Produto(String nome, Double preco, String marca) {
+	
+	public Produto(Categoria categoria,String nome, Double preco, String marca) {
 		this.idProduto = counterId++;
+		this.categoria = categoria;
 		this.nome = nome;
 		this.preco = preco;
 		this.marca = marca;
 	}
-
+	
+	public Categoria getCategoria(){
+		return categoria;
+	}
+	
 	public Integer getIdProduto() {
 		return idProduto;
 	}
@@ -52,6 +59,12 @@ public abstract class Produto {
 
 	public void setMarca(String marca) {
 		this.marca = marca;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ID Produto: %d \nProduto: %s \nPreço: %s \nMarca: %s\n",
+				getIdProduto(), getNome(), Utils.doubleToString(getPreco()), getMarca());
 	}
 	
 	

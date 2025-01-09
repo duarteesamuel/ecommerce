@@ -1,8 +1,8 @@
 package enums;
 
 public enum Categoria {
-	SMARTPHONES("Celulares"),
-	ELETROELETRONICOS("Eletrônicos");
+	SMARTPHONES("Smartphone"),
+	ELETRONICOS("Eletrônico");
 	
 	private String descricao;
 	
